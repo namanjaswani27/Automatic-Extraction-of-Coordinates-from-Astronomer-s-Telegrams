@@ -40,7 +40,7 @@ Observatorio del Roque de los Muchachos’
 
 # Results [ on Validation data ]
 
-## Classifier : `SVM`
+## Classifier : `Support Vector Machine (SVM)`
 
 `Classification Scores `
 | Class | Precision | Recall | F1 Score | Support |
