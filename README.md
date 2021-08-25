@@ -29,11 +29,12 @@ range 5000-9400 A with the 3.58m TNG telescope equipped with LRS at
 Observatorio del Roque de los Muchachos’
 
 # Approach
-
+*Kindly refer to Report.pdf for more details*
 1. Apply regex to extract coordinates with Object-name-format. If found, then just keep it, else step 2 onwards.
-2. Trained a Linear classifier (SVM on TFIDF of input documents) on sentences containing all formats except Object-name-format and Decimal-format.
-3. During inference, if sentence is labeled as '1', then apply regex to extract all formats except Object-name-format and Decimal-format. 
-4. If regex did not extract any coordinate, then that means sentence containes coordinates in Decimal-format. Hence apply regex to extract Decimal-format
+2. To handle **class imbalance** [More Positive | Less Negative], we generated more samples for negative class by running decimal-format regex to get false positives of coordinates, and added them to our Negative Class dataset.
+3. Trained a Linear classifier (SVM on TFIDF of input documents) on sentences containing all formats except Object-name-format and Decimal-format.
+4. During inference, if sentence is labeled as '1', then apply regex to extract all formats except Object-name-format and Decimal-format. 
+5. If regex did not extract any coordinate, then that means sentence containes coordinates in Decimal-format. Hence apply regex to extract Decimal-format
 
 ![Approach](https://github.com/namanjaswani27/Automatic_Extraction_of_Coordinates_from_Astronomers_Telegrams/blob/main/Model_Pipeline.png?raw=true)
 
