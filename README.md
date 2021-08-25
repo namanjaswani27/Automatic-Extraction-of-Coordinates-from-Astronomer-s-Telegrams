@@ -30,4 +30,44 @@ Observatorio del Roque de los Muchachos’
 
 # Approach
 
-  
+1. Apply regex to extract coordinates with Object-name-format. If found, then just keep it, else step 2 onwards.
+2. Trained a Linear classifier (SVM on TFIDF of input documents) on sentences containing all formats except Object-name-format and Decimal-format.
+3. During inference, if sentence is labeled as '1', then apply regex to extract all formats except Object-name-format and Decimal-format. 
+4. If regex did not extract any coordinate, then that means sentence containes coordinates in Decimal-format. Hence apply regex to extract Decimal-format
+
+![Approach](https://github.com/namanjaswani27/Automatic_Extraction_of_Coordinates_from_Astronomers_Telegrams/blob/main/Model_Pipeline.png?raw=true)
+
+# Results [ on Validation data ]
+
+## Classifier : `SVM`
+
+`Classification Scores `
+| Class | Precision | Recall | F1 Score | Support |
+| :---: | :---: | :---: |  :---: | :---: |
+| 0 | 0.96 | 0.95 | 0.96 | 145 |
+| 1 | 0.94 | 0.95 | 0.95 | 125 |
+
+`Confusion Matrix`
+||Actual Positive| Actual Negative|
+|:---:| :---: | :---: |
+|Predicted Positive| 119 | 7 | 
+|Predicted Negative| 6 | 138 | 
+
+
+## Classifier : `Logistic Regression`
+
+`Classification Scores `
+| Class | Precision | Recall | F1 Score | Support |
+| :---: | :---: | :---: |  :---: | :---: |
+| 0 | 0.99 | 0.95 | 0.97 | 145 |
+| 1 | 0.95 | 0.98 | 0.96 | 125 |
+
+`Confusion Matrix`
+||Actual Positive| Actual Negative|
+|:---:| :---: | :---: |
+|Predicted Positive| 123 | 7 | 
+|Predicted Negative| 2 | 138 | 
+
+
+
+
